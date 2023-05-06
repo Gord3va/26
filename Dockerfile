@@ -1,8 +1,8 @@
 FROM python:3.10-slim
 
 WORKDIR /code
-COPY ../pythonProject4/requirements.txt .
-RUN pip install -r requirements.txt
+COPY requirements1.txt .
+RUN pip install -r requirements1.txt
 COPY app.py .
 COPY migrations migrations
 COPY docker_config.py default_config.py
