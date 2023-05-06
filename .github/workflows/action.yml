@@ -14,6 +14,7 @@ jobs:
         run: docker push gord3va/hw26:$GITHUB_REF_NAME-$GITHUB_RUN_ID
   deploy:
     runs-on: ubuntu-latest
+    needs: build_and_push
     steps:
       - name: clone code
         uses: actions/checkout@v2
@@ -23,6 +24,7 @@ jobs:
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
           cat docker_ci_config.py| envsubst > deploy/docker_config.py
       - name: copy files to server
+
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
